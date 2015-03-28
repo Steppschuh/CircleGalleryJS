@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Circles Demo</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<link href="circles.css" rel="stylesheet" type="text/css" />
+
+		<script src="main.js"></script>
+		<script src="circles.js"></script>
+
+		<script type="text/javascript">
+
+			window.onload = function() {
+				createSampleCircles();
+			}
+
+			window.onresize = function() {
+				// this will resize the circles based on their container size
+				requestCirclesUpdate();
+			}
+
+			function createSampleCircles() {
+				// create new circles for showcasing projects & photos
+				var projectsCircle = createCircle("Projects", "http://steppschuh.net/projects/");
+				var photographyCircle = createCircle("Photography", "http://steppschuh.net/photography/");
+				
+				// create a few links that will be displayed
+				var link0 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_0.jpg", "http://steppschuh.net");
+				var link1 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_1.jpg", "http://steppschuh.net");
+				var link2 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_2.jpg", "http://steppschuh.net");
+				var link3 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_3.jpg", "http://steppschuh.net");
+				var link4 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_4.jpg", "http://steppschuh.net");
+				var link5 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_5.jpg", "http://steppschuh.net");
+				var link6 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_6.jpg", "http://steppschuh.net");
+				var link7 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_7.jpg", "http://steppschuh.net");
+				var link8 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_8.jpg", "http://steppschuh.net");
+				var link9 = createLink("file:///Users/Steppschuh/Documents/Projects/Steppschuh.net/projects/images/sample_9.jpg", "http://steppschuh.net");
+
+				// add those sample links to the circles
+				addLinkToCircle(link0, projectsCircle);
+				addLinkToCircle(link1, projectsCircle);
+				addLinkToCircle(link2, projectsCircle);
+				addLinkToCircle(link3, projectsCircle);
+				addLinkToCircle(link4, projectsCircle);
+				addLinkToCircle(link5, projectsCircle);
+				
+				addLinkToCircle(link6, photographyCircle);
+				addLinkToCircle(link7, photographyCircle);
+				addLinkToCircle(link8, photographyCircle);
+				addLinkToCircle(link9, photographyCircle);
+
+				// show the circles in these container divs
+				var containerLeft = document.getElementById("circleContainerLeft");
+				showCircleInContainer(projectsCircle, containerLeft);
+
+				var containerRight = document.getElementById("circleContainerRight");
+				showCircleInContainer(photographyCircle, containerRight);
+			}
+
+		</script>
+
+		<style type="text/css">
+			#content {
+				position: absolute;
+				top: 50px;
+				left: 50px;
+				right: 50px;
+				bottom: 50px;
+				padding: 50px;
+				background-color: #EEE;
+			}
+
+			#circleContainerLeft {
+				float: left;
+				width: 45%;
+				height: 100%;
+				background-color: #EFE;
+			}
+
+			#circleContainerRight {
+				float: right;
+				width: 45%;
+				height: 60%;
+				background-color: #EFE;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="content">
+			<div id="circleContainerLeft"></div>
+			<div id="circleContainerRight"></div>
+		</div>
+	</body>
+</html>
