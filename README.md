@@ -2,7 +2,7 @@ CircleGalleryJS
 ===================
 
 ### Description
-Dynamically creates responsive round image galleries. Each image can open a specific link and may be added at runtime.
+Dynamically creates responsive round image galleries. Each image can open a specific link and may be added at runtime. See [live demo](https://rawgit.com/Steppschuh/CircleGalleryJS/master/demo.html).
 
 ![Screenshot](https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/screenshot_1.jpg "CircleGalleryJS Demo")
 
@@ -28,3 +28,8 @@ window.onresize = function() {
   requestCirclesUpdate();
 }
 ```
+
+### Compatibility
+Tested and working in:
+- Chrome (41.0)
+- Safari (8.0)
