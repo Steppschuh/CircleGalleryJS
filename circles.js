@@ -6,6 +6,9 @@ var linkOpacityActive = 1;
 var nameOpacityNormal = 0.6;
 var nameOpacityActive = 0.8;
 var randomizeLinks = true;
+var showBackgroundByDefault = false;
+var animateNameContainer = true;
+
 
 var circles = new Array();
 var lastUpdate = 0;
@@ -24,6 +27,7 @@ function createCircle(name, destinationUrl) {
 	circle.name = name;
 	circle.url = destinationUrl;
 	circle.links = new Array();
+	circle.showBackground = showBackgroundByDefault;
 	return circle;
 }
 
@@ -38,6 +42,10 @@ function showCircleInContainer(circle, containerDiv) {
 function getCircleDOM(circle, containerDiv) {
 	// this will return the complete DOM for a given circle object
 	//console.log("Creating circle dom for " + circle.name);
+
+	if (randomizeLinks) {
+		circle.links = shuffle(circle.links);
+	}
 
 	// create container & wrapper
 	var containerWidth = containerDiv.offsetWidth;
@@ -63,8 +71,13 @@ function getCircleDOM(circle, containerDiv) {
 	// create name div
 	var circleNameContainer = document.createElement("div");
 	circleNameContainer.className = "circleNameContainer";
-	circleNameContainer.style.bottom = ((1 - circleTitlePosition) * circleDiameter) - (circleNameContainer.offsetHeight / 2) + "px";
+
+	circleNameContainer.bottomInActive = ((1 - circleTitlePosition) * circleDiameter) - (circleNameContainer.offsetHeight / 2) + "px";
+	circleNameContainer.bottomActive = (circleNameContainer.offsetHeight / 2) + "px";
+	circleNameContainer.style.bottom = circleNameContainer.bottomInActive;
 	circleNameContainer.style.backgroundColor = "rgba(0,0,0," + nameOpacityNormal + ")";
+	circleNameContainer.style.padding = "20px";
+	circleNameContainer.style.fontSize = "20px";
 
 	circleNameContainer.onclick = function() {
 		openLinkUrl(circle.url);
@@ -75,6 +88,22 @@ function getCircleDOM(circle, containerDiv) {
 
 	circleNameContainer.onmouseout = function() {
 		this.style.backgroundColor = "rgba(0,0,0," + nameOpacityNormal + ")";
+	};
+
+	circleNameContainer.show = function() {
+		if (animateNameContainer) {
+			this.style.bottom = this.bottomInActive;
+			this.style.padding = "20px";
+			this.style.fontSize = "20px";
+		}
+	};
+
+	circleNameContainer.hide = function() {
+		if (animateNameContainer) {
+			this.style.bottom = this.bottomActive;
+			this.style.padding = "10px";
+			this.style.fontSize = "14px";
+		}
 	};
 
 	var circleNameValue = document.createElement("div");
@@ -152,6 +181,14 @@ function getCircleDOM(circle, containerDiv) {
 		circleLinksContainer.appendChild(linkRow);
 	}
 
+	circleCenter.onmouseover = function() {
+		circleNameContainer.hide();
+	};
+
+	circleCenter.onmouseout = function() {
+		circleNameContainer.show();	
+	};
+
 	circleCenter.appendChild(circleLinksContainer);
 	circleCenter.appendChild(circleNameContainer);
 
@@ -178,12 +215,12 @@ function openLinkUrl(destinationUrl) {
 function requestCirclesUpdate() {
 	setTimeout(function() {
 		var now = (new Date()).getTime();
-		if (lastUpdate + 250 > now) {
+		if (lastUpdate + 500 > now) {
 			return;			
 		}
 
 		updateCircleDivs();
-	}, 250);
+	}, 500);
 }
 
 function updateCircleDivs() {
@@ -214,4 +251,23 @@ function updateCircleDiv(circleDiv) {
 
 function randomBoolean() {
 	return (Math.random() < 0.5);
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }

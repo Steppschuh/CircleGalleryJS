@@ -31,7 +31,6 @@
 
 .circleNameContainer {
 	position: absolute;
-	padding: 15px;
 	left: 0px;
 	right: 0px;
 	bottom: -50px;
@@ -47,7 +46,6 @@
 .circleNameValue {
 	text-align: center;
 	font-family: 'Roboto', sans-serif;
-	font-size: 26px;
 	color: #FFF;
 }
 
