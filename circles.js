@@ -1,6 +1,6 @@
 
 var circleTitlePosition = 0.9; // show the title div at X % of the circle
-var circlePadding = 10;
+var circlePadding = 20;
 var linkOpacityNormal = 0.7;
 var linkOpacityActive = 1;
 var nameOpacityNormal = 0.6;
@@ -55,6 +55,15 @@ function getCircleDOM(circle, containerDiv) {
 	var circleContainer = document.createElement("div");
 	circleContainer.id = "circle_" + circle.name;
 	circleContainer.className = "circle";
+
+	var circleBackground = document.createElement("div");
+	circleBackground.className = "circleBackground";
+	if (circle.showBackground) {
+		if (circle.backgroundImage == null) {
+			circle.backgroundImage = circle.links[0].imageSrc;
+		}
+		circleBackground.style.backgroundImage = "url('" + circle.backgroundImage + "')";
+	}
 
 	var circleCenterWrapper = document.createElement("div");
 	circleCenterWrapper.className = "circleCenterWrapper";
@@ -194,6 +203,7 @@ function getCircleDOM(circle, containerDiv) {
 
 	circleCenterWrapper.appendChild(circleCenter);
 	circleContainer.appendChild(circleCenterWrapper);
+	circleContainer.appendChild(circleBackground);
 	return circleContainer;
 }
 

@@ -4,10 +4,22 @@
 	overflow: hidden;
 }
 
+.circleBackground {
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	filter: blur(10px);
+	-webkit-filter: blur(10px);
+	background-position: center;
+	background-repeat: none;
+	background-size: cover;
+}
+
 .circleCenterWrapper {
 	position: relative;
 	left: 50%;
 	top: 50%;
+	float: left;
 	overflow: hidden;
 	-webkit-border-radius: 1000px;
     border-radius: 1000px;

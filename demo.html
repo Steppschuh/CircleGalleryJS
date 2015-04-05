@@ -20,7 +20,13 @@
 			function createSampleCircles() {
 				// create new circles for showcasing projects & photos
 				var projectsCircle = createCircle("Projects", "http://steppschuh.net/projects/");
+
 				var photographyCircle = createCircle("Photography", "http://steppschuh.net/photography/");
+				
+				// add a background image for demonstration
+				photographyCircle.showBackground = true;
+				// if you don't set a backgroundimage, it will use the first link
+				//photographyCircle.backgroundImage = "images/sample_9.jpg";
 				
 				// create a few links that will be displayed
 				var link0 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_0.jpg", "http://steppschuh.net/?0");
