@@ -37,6 +37,7 @@ function showCircleInContainer(circle, containerDiv) {
 
 function getCircleDOM(circle, containerDiv) {
 	// this will return the complete DOM for a given circle object
+	//console.log("Creating circle dom for " + circle.name);
 
 	// create container & wrapper
 	var containerWidth = containerDiv.offsetWidth;
@@ -81,7 +82,6 @@ function getCircleDOM(circle, containerDiv) {
 	circleNameValue.innerHTML = circle.name;
 
 	circleNameContainer.appendChild(circleNameValue);
-	
 
 	// create link container
 	var circleLinksContainer = document.createElement("div");
@@ -122,17 +122,18 @@ function getCircleDOM(circle, containerDiv) {
 
 		// add collumns for this row
 		for (var colIndex = 0; colIndex < linkRowCollumns; colIndex++) {
-			var currentLink = circle.links[currentLinkIndex];
+			var currentLink = circle.links[currentLinkIndex];			
 
 			var linkCol = document.createElement("div");
 			linkCol.className = "linkCol";
+			linkCol.destinationUrl = currentLink.destinationUrl;
 			linkCol.style.left = (colIndex * colWidth) + "px"
 			linkCol.style.width = colWidth + "px"
 			linkCol.style.opacity = linkOpacityNormal;
 			linkCol.style.backgroundImage = "url('" + currentLink.imageSrc + "')";
 			
 			linkCol.onclick = function() {
-				openLinkUrl(currentLink.destinationUrl);
+				openLinkUrl(this.destinationUrl);
 			};
 
 			linkCol.onmouseover = function() {
