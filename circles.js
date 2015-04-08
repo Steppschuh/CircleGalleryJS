@@ -3,6 +3,8 @@ var circleTitlePosition = 0.9; // show the title div at X % of the circle
 var circlePadding = 20;
 var linkOpacityNormal = 0.7;
 var linkOpacityActive = 1;
+var backgroundOpacityNormal = 0.3;
+var backgroundOpacityActive = 0.5;
 var nameOpacityNormal = 0.6;
 var nameOpacityActive = 0.8;
 var randomizeLinks = true;
@@ -58,11 +60,39 @@ function getCircleDOM(circle, containerDiv) {
 
 	var circleBackground = document.createElement("div");
 	circleBackground.className = "circleBackground";
+	circleBackground.style.opacity = backgroundOpacityNormal;
+	circleBackground.lastUpdate = 0;
+	circleBackground.lastUpdateRequest = 0;
+
+	circleBackground.fadeIn = function() {
+		this.style.opacity = backgroundOpacityActive;
+	};
+
+	circleBackground.fadeOut = function() {
+		this.style.opacity = backgroundOpacityNormal;
+	};
+	circleBackground.updateBackground = function(newBackgroundImage) {
+		this.style.backgroundImage = newBackgroundImage;
+		this.lastUpdate = (new Date()).getTime();
+		hasUpdated = true;
+	}
+	circleBackground.requestBackgroundUpdate = function(newBackgroundImage) {
+		this.lastUpdateRequest = (new Date()).getTime();
+		var background = this;
+		setTimeout(function() {
+			var now = (new Date()).getTime();
+			if (this.lastUpdateRequest + 490 > now) {
+				return;			
+			}
+
+			background.updateBackground(newBackgroundImage);
+		}, 500);
+	}
 	if (circle.showBackground) {
 		if (circle.backgroundImage == null) {
 			circle.backgroundImage = circle.links[0].imageSrc;
 		}
-		circleBackground.style.backgroundImage = "url('" + circle.backgroundImage + "')";
+		circleBackground.updateBackground("url('" + circle.backgroundImage + "')");
 	}
 
 	var circleCenterWrapper = document.createElement("div");
@@ -99,7 +129,7 @@ function getCircleDOM(circle, containerDiv) {
 		this.style.backgroundColor = "rgba(0,0,0," + nameOpacityNormal + ")";
 	};
 
-	circleNameContainer.show = function() {
+	circleNameContainer.fadeIn = function() {
 		if (animateNameContainer) {
 			this.style.bottom = this.bottomInActive;
 			this.style.padding = "20px";
@@ -107,7 +137,7 @@ function getCircleDOM(circle, containerDiv) {
 		}
 	};
 
-	circleNameContainer.hide = function() {
+	circleNameContainer.fadeOut = function() {
 		if (animateNameContainer) {
 			this.style.bottom = this.bottomActive;
 			this.style.padding = "10px";
@@ -176,6 +206,9 @@ function getCircleDOM(circle, containerDiv) {
 
 			linkCol.onmouseover = function() {
 				this.style.opacity = linkOpacityActive;
+				if (circle.showBackground) {					
+					circleBackground.requestBackgroundUpdate(this.style.backgroundImage);
+				}				
 			};
 
 			linkCol.onmouseout = function() {
@@ -191,11 +224,13 @@ function getCircleDOM(circle, containerDiv) {
 	}
 
 	circleCenter.onmouseover = function() {
-		circleNameContainer.hide();
+		circleNameContainer.fadeOut();
+		circleBackground.fadeIn();
 	};
 
 	circleCenter.onmouseout = function() {
-		circleNameContainer.show();	
+		circleNameContainer.fadeIn();
+		circleBackground.fadeOut();
 	};
 
 	circleCenter.appendChild(circleLinksContainer);

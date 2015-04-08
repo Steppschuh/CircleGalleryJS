@@ -26,19 +26,20 @@
 				// add a background image for demonstration
 				photographyCircle.showBackground = true;
 				// if you don't set a backgroundimage, it will use the first link
+				// caution: links are randomized by default
 				//photographyCircle.backgroundImage = "images/sample_9.jpg";
 				
 				// create a few links that will be displayed
-				var link0 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_0.jpg", "http://steppschuh.net/?0");
-				var link1 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_1.jpg", "http://steppschuh.net/?1");
-				var link2 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_2.jpg", "http://steppschuh.net/?2");
-				var link3 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_3.jpg", "http://steppschuh.net/?3");
-				var link4 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_4.jpg", "http://steppschuh.net/?4");
-				var link5 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_5.jpg", "http://steppschuh.net/?5");
-				var link6 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_6.jpg", "http://steppschuh.net/?6");
-				var link7 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_7.jpg", "http://steppschuh.net/?7");
-				var link8 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_8.jpg", "http://steppschuh.net/?8");
-				var link9 = createLink("https://raw.githubusercontent.com/Steppschuh/CircleGalleryJS/master/images/sample_9.jpg", "http://steppschuh.net/?9");
+				var link0 = createLink("images/sample_0.jpg", "http://steppschuh.net/?0");
+				var link1 = createLink("images/sample_1.jpg", "http://steppschuh.net/?1");
+				var link2 = createLink("images/sample_2.jpg", "http://steppschuh.net/?2");
+				var link3 = createLink("images/sample_3.jpg", "http://steppschuh.net/?3");
+				var link4 = createLink("images/sample_4.jpg", "http://steppschuh.net/?4");
+				var link5 = createLink("images/sample_5.jpg", "http://steppschuh.net/?5");
+				var link6 = createLink("images/sample_6.jpg", "http://steppschuh.net/?6");
+				var link7 = createLink("images/sample_7.jpg", "http://steppschuh.net/?7");
+				var link8 = createLink("images/sample_8.jpg", "http://steppschuh.net/?8");
+				var link9 = createLink("images/sample_9.jpg", "http://steppschuh.net/?9");
 
 				// add those sample links to the circles
 				addLinkToCircle(link0, projectsCircle);
@@ -78,14 +79,14 @@
 				float: left;
 				width: 45%;
 				height: 100%;
-				background-color: #EFE;
+				background-color: #FFF;
 			}
 
 			#circleContainerRight {
 				float: right;
 				width: 45%;
 				height: 60%;
-				background-color: #EFE;
+				background-color: #FFF;
 			}
 		</style>
 	</head>
